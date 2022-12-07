@@ -1,5 +1,4 @@
 const fs = require('fs')
-// const {str} = require('./dyncamic-comp-ids')
 const {data} = require('./data')
 const writer = fs.createWriteStream('./ouput.txt')
 let str = 'Filename\tsiteTypes\taudiences\tproductTypes\tdocTypes\tassetClasses\tshareClasses\ttaNumbers\tfundAccountingIds\tdocumentUrl\n'
@@ -22,8 +21,6 @@ for(const result of data.results) {
   const fundAccountingIds = !metadata.FundAccountingIds ? ['-none-'] : metadata.FundAccountingIds.FundAccountingId
   const documentUrl = fileUrl
 
-  // writer.write('\n')
-  // console.log('\n')
   str = 
     `${filename}\t` +
     `${ Array.isArray(siteTypes) ? siteTypes.join(',') : siteTypes }\t` +
@@ -37,12 +34,5 @@ for(const result of data.results) {
     `${ documentUrl}\n`
 
   writer.write(str)
-  // if(i>31) break
-
-  // `${filename}\t${siteTypes.join(',')}\t
-  // ${audiences.join(',')}\t
-  // ${docTypes.join(',')}\t
-  // ${assetClasses.join(',')}\t
-  // ${shareClasses.join(',')}\t
-  // ${documentUrl}\n`)
 }
+console.log(i) // count
