@@ -1,7 +1,7 @@
 const fs = require('fs')
-const {data} = require('./data')
+const {data} = require('./data-fa-ip')
 const writer = fs.createWriteStream('./ouput.txt')
-let str = 'Filename\tsiteTypes\taudiences\tproductTypes\tdocTypes\tassetClasses\tshareClasses\ttaNumbers\tfundAccountingIds\tdocumentUrl\n'
+let str = 'Filename\tdocumentTitle\tsiteTypes\taudiences\tproductTypes\tdocTypes\tassetClasses\tshareClasses\ttaNumbers\tfundAccountingIds\tdocumentUrl\n'
 let i = 0
 
 writer.write(str)
@@ -11,6 +11,7 @@ for(const result of data.results) {
   const filename = edoc.title
   const fileUrl = !edoc.DocumentUrl ? '-' : edoc.DocumentUrl.a['@href']
   const metadata = edoc.metaDataFields
+  const doctTile = metadata.DocumentTitle
   const siteTypes = !metadata.SiteTypes ? ['-none-'] : metadata.SiteTypes.SiteType
   const audiences = !metadata.Audiences ? ['-none-'] : metadata.Audiences.Audience
   const productTypes = !metadata.ProductTypes ? ['-none-'] : metadata.ProductTypes.ProductType
@@ -23,6 +24,7 @@ for(const result of data.results) {
 
   str = 
     `${filename}\t` +
+    `${doctTile}\t` +
     `${ Array.isArray(siteTypes) ? siteTypes.join(',') : siteTypes }\t` +
     `${ Array.isArray(audiences) ? audiences.join(',') : audiences }\t` +
     `${ Array.isArray(productTypes) ? productTypes.join(',') : productTypes }\t` +
